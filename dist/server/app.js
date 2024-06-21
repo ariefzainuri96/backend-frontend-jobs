@@ -10,7 +10,10 @@ const angular_jobs_route_1 = __importDefault(require("../routes/angular_jobs_rou
 const vue_jobs_route_1 = __importDefault(require("../routes/vue_jobs_route"));
 const user_route_1 = __importDefault(require("../routes/user_route"));
 require("dotenv/config");
+const cors = require('cors');
 const app = (0, express_1.default)();
+// enabling CORS for any unknown origin(https://xyz.example.com)
+app.use(cors());
 app.use(express_1.default.json());
 // app.use(loggerMiddleware)
 // routers

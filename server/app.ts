@@ -12,8 +12,11 @@ declare module 'express-serve-static-core' {
     }
 }
 
+const cors = require('cors');
 const app = express();
 
+// enabling CORS for any unknown origin(https://xyz.example.com)
+app.use(cors());
 app.use(express.json());
 // app.use(loggerMiddleware)
 
