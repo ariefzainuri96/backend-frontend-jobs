@@ -18,14 +18,14 @@ app.use(express.json());
 // app.use(loggerMiddleware)
 
 // routers
-app.use('/jobs/react', reactRoutes);
-app.use('/jobs/angular', angularRoutes);
-app.use('/jobs/vue', vueRoutes);
+app.use('/react/jobs', reactRoutes);
+app.use('/angular/jobs', angularRoutes);
+app.use('/vue/jobs', vueRoutes);
 app.use('/users', userRoutes);
 
 // greetings
 app.get('/', (_, res: Response) => {
-    res.send('Hello world');
+    res.send('You are connected to Frontend Jobs API');
 });
 
 function loggerMiddleware(req: Request, res: Response, next: NextFunction) {
