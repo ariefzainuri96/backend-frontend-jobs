@@ -7,11 +7,12 @@ import {
     updateJobById,
 } from '../controllers/jobs_controller';
 import { JobItem, ReactJob } from '../models/job_model';
+import { validateToken } from '../middleware/validate_token';
 
 const router = express.Router();
 
 // validate token for all request in this routes
-// router.use(validateToken);
+router.use(validateToken);
 
 // add job
 router.post('/', async (req, res) => await addJob<JobItem>(ReactJob, req, res));

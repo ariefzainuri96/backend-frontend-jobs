@@ -14,10 +14,11 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
 Object.defineProperty(exports, "__esModule", { value: true });
 const express_1 = __importDefault(require("express"));
 const jobs_controller_1 = require("../controllers/jobs_controller");
+const validate_token_1 = require("../middleware/validate_token");
 const job_model_1 = require("../models/job_model");
 const router = express_1.default.Router();
 // validate token for all request in this routes
-// router.use(validateToken);
+router.use(validate_token_1.validateToken);
 // add job
 router.post('/', (req, res) => __awaiter(void 0, void 0, void 0, function* () { return yield (0, jobs_controller_1.addJob)(job_model_1.AngularJob, req, res); }));
 // get all jobs

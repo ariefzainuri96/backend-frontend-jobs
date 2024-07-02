@@ -1,11 +1,16 @@
-import mongoose from "mongoose"
+import mongoose from 'mongoose';
 
-const UserSchema = new mongoose.Schema(
+export type TUserType = {
+    email?: string;
+    password?: string;
+};
+
+const UserSchema = new mongoose.Schema<TUserType>(
     {
         email: {
             type: String,
             required: [true, 'Please enter the email!'],
-            unique: [true, 'Email address already taken']
+            unique: [true, 'Email address already taken'],
         },
         password: {
             type: String,
@@ -13,10 +18,12 @@ const UserSchema = new mongoose.Schema(
         },
     },
     {
-        timestamps: true
+        timestamps: true,
     }
-)
+);
 
-const User = mongoose.model('User', UserSchema)
+const userDB = mongoose.connection.useDb('user');
 
-export default User
+const User = userDB.model('User', UserSchema);
+
+export default User;

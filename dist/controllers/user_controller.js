@@ -19,25 +19,24 @@ const bcrypt_1 = __importDefault(require("bcrypt"));
 const jsonwebtoken_1 = __importDefault(require("jsonwebtoken"));
 const common_functions_1 = require("../common/common_functions");
 const register = (req, res) => __awaiter(void 0, void 0, void 0, function* () {
+    var _a;
     try {
-        const { email, password } = req.body;
-        const userNotAvailable = yield user_model_1.default.findOne({ email });
+        const data = new user_model_1.default(req.body);
+        yield data.validate();
+        const userNotAvailable = yield user_model_1.default.findOne({
+            email: data.email,
+        });
         if (userNotAvailable) {
             return (0, common_functions_1.sendError)(res, 400, 'Email already used!');
         }
-        const hashedPassword = yield bcrypt_1.default.hash(password, 10);
-        const user = yield user_model_1.default.create({
-            email: email,
-            password: hashedPassword
-        });
+        const hashedPassword = yield bcrypt_1.default.hash((_a = data.password) !== null && _a !== void 0 ? _a : '', 10);
+        data.password = hashedPassword;
+        const user = yield data.save();
         if (user) {
             res.status(200).json({
-                message: "Register Success",
+                message: 'Register Success',
                 status: 200,
-                data: {
-                    id: user.id,
-                    email: user.email
-                }
+                data: user,
             });
         }
         else {
@@ -51,23 +50,23 @@ const register = (req, res) => __awaiter(void 0, void 0, void 0, function* () {
 exports.register = register;
 const login = (req, res) => __awaiter(void 0, void 0, void 0, function* () {
     try {
-        const { email, password } = req.body;
-        if (!email || !password) {
-            return (0, common_functions_1.sendError)(res, 400, "All fields are mandatory");
-        }
-        const user = yield user_model_1.default.findOne({ email });
+        const data = new user_model_1.default(req.body);
+        yield data.validate();
+        const user = yield user_model_1.default.findOne({
+            email: data.email,
+        });
         // compare password with hash password
-        if (user && (yield bcrypt_1.default.compare(password, user.password))) {
+        if (user && (yield bcrypt_1.default.compare(data.password, user.password))) {
             const token = jsonwebtoken_1.default.sign({
                 email: user.email,
-                id: user.id
+                id: user.id,
             }, `${process.env.ACCESS_TOKEN_SECRET}`, {
-                expiresIn: '15m'
+                expiresIn: '365d',
             });
             res.status(200).json({
                 status: 200,
                 message: 'Login Success',
-                data: token
+                data: token,
             });
         }
         else {
@@ -84,7 +83,7 @@ const current = (req, res) => __awaiter(void 0, void 0, void 0, function* () {
         res.status(200).json({
             status: 200,
             message: 'Get Current Profile Success',
-            data: req.user
+            data: req.user,
         });
     }
     catch (error) {

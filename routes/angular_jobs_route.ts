@@ -12,7 +12,7 @@ import { JobItem, AngularJob } from '../models/job_model';
 const router = express.Router();
 
 // validate token for all request in this routes
-// router.use(validateToken);
+router.use(validateToken);
 
 // add job
 router.post(

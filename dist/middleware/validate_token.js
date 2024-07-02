@@ -15,12 +15,11 @@ Object.defineProperty(exports, "__esModule", { value: true });
 exports.validateToken = void 0;
 const jsonwebtoken_1 = __importDefault(require("jsonwebtoken"));
 const common_functions_1 = require("../common/common_functions");
-// import { ICustomRequest } from "../interfaces/i_custom_request";
 const validateToken = (req, res, next) => __awaiter(void 0, void 0, void 0, function* () {
     let token;
     let authHeader = req.headers.Authorization || req.headers.authorization;
     console.log(`${req.baseUrl} ${authHeader}`);
-    if (authHeader && ((0, common_functions_1.isText)(authHeader) && authHeader.startsWith('Bearer'))) {
+    if (authHeader && (0, common_functions_1.isText)(authHeader) && authHeader.startsWith('Bearer')) {
         token = authHeader.split(' ')[1];
         const secret = process.env.ACCESS_TOKEN_SECRET;
         console.log(`token => ${token}`);

@@ -8,14 +8,15 @@ const UserSchema = new mongoose_1.default.Schema({
     email: {
         type: String,
         required: [true, 'Please enter the email!'],
-        unique: [true, 'Email address already taken']
+        unique: [true, 'Email address already taken'],
     },
     password: {
         type: String,
         required: [true, 'Please enter the password!'],
     },
 }, {
-    timestamps: true
+    timestamps: true,
 });
-const User = mongoose_1.default.model('User', UserSchema);
+const userDB = mongoose_1.default.connection.useDb('user');
+const User = userDB.model('User', UserSchema);
 exports.default = User;
