@@ -12,10 +12,14 @@ const user_route_1 = __importDefault(require("../routes/user_route"));
 require("dotenv/config");
 const cors = require('cors');
 const app = (0, express_1.default)();
+const swaggerUi = require('swagger-ui-express');
+const swaggerDoc = require('../swagger/swagger-output.json');
 // enabling CORS for any unknown origin(https://xyz.example.com)
 app.use(cors());
 app.use(express_1.default.json());
 // app.use(loggerMiddleware)
+// Swagger route
+app.use('/api-docs', swaggerUi.serve, swaggerUi.setup(swaggerDoc));
 // routers
 app.use('/react/jobs', react_jobs_route_1.default);
 app.use('/angular/jobs', angular_jobs_route_1.default);

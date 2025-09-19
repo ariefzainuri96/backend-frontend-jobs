@@ -5,6 +5,7 @@ import angularRoutes from '../routes/angular_jobs_route';
 import vueRoutes from '../routes/vue_jobs_route';
 import userRoutes from '../routes/user_route';
 import 'dotenv/config';
+// import swaggerDoc from '../swagger/swagger-output.json';
 
 declare module 'express-serve-static-core' {
     interface Request {
@@ -14,11 +15,16 @@ declare module 'express-serve-static-core' {
 
 const cors = require('cors');
 const app = express();
+const swaggerUi = require('swagger-ui-express');
+const swaggerDoc = require('../swagger/swagger-output.json');
 
 // enabling CORS for any unknown origin(https://xyz.example.com)
 app.use(cors());
 app.use(express.json());
 // app.use(loggerMiddleware)
+
+// Swagger route
+app.use('/api-docs', swaggerUi.serve, swaggerUi.setup(swaggerDoc));
 
 // routers
 app.use('/react/jobs', reactRoutes);

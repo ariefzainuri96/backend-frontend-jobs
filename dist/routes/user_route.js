@@ -7,7 +7,29 @@ const express_1 = __importDefault(require("express"));
 const user_controller_1 = require("../controllers/user_controller");
 const validate_token_1 = require("../middleware/validate_token");
 const router = express_1.default.Router();
-router.post('/register', user_controller_1.register);
-router.post('/login', user_controller_1.login);
+router.post('/register', (req, res) => {
+    /*
+    #swagger.summary = 'Register account';
+    #swagger.description = 'testing description';
+    #swagger.parameters['body'] = {
+        required: true,
+        in: 'body',
+        schema: { $ref: '#/components/schemas/LoginRequest' },
+    };
+    */
+    return (0, user_controller_1.register)(req, res);
+});
+router.post('/login', (req, res) => {
+    /*
+    #swagger.summary = 'Login to get an access token';
+    #swagger.description = 'testing description';
+    #swagger.parameters['body'] = {
+        required: true,
+        in: 'body',
+        schema: { $ref: '#/components/schemas/LoginRequest' },
+    };
+    */
+    return (0, user_controller_1.login)(req, res);
+});
 router.get('/current', validate_token_1.validateToken, user_controller_1.current);
 exports.default = router;
