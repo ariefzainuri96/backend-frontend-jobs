@@ -55,7 +55,7 @@ mongoose
         const host =
             process.env.NODE_ENV === 'production' ? '0.0.0.0' : 'localhost';
 
-        app.listen(port, host, () => {
+        app.listen(port, () => {
             console.log('server is running on 3001');
         });
     })
