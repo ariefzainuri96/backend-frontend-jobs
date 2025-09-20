@@ -7,7 +7,7 @@
     "test": "npm test",
     "start": "nodemon dist/server/app.js",
     "dev": "ts-node swagger/swagger.ts && nodemon --config nodemon.json server/app.ts",
-    "build": "rimraf dist && tsc",
+    "build": "rimraf dist && tsc && copyfiles -u 1 swagger/swagger-output.json dist/swagger",
     "ts.check": "tsc --project tsconfig.json",
     "add-build": "git add dist",
     "lint": "eslint . --ext .ts"
@@ -46,6 +46,7 @@
     "@types/express": "^4.17.21",
     "@types/jsonwebtoken": "^9.0.6",
     "@types/node": "^20.8.10",
+    "copyfiles": "^2.4.1",
     "pre-commit": "^1.2.2",
     "rimraf": "^5.0.5",
     "typescript": "^5.2.2"
