@@ -1,12 +1,13 @@
 import swaggerAutogen from 'swagger-autogen';
 import userSwaggerSchema from './swagger-schema';
+import 'dotenv/config';
 
 const doc = {
     info: {
         title: 'My Express API',
         description: 'API documentation generated with swagger-autogen',
     },
-    host: 'localhost:3001', // Update for production later
+    host:  `${process.env.NODE_ENV === 'production' ? '205.198.87.68' : 'localhost'}:3001`, // Update for production later
     schemes: ['http'],
     components: {
         // OpenAPI 3.0
