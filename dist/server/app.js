@@ -38,7 +38,9 @@ mongoose_1.default
     .connect(`${process.env.MONGODB_CONNECTION_STRING}`)
     .then(() => {
     console.log('connected to mongodb');
-    app.listen(3001, () => {
+    const port = 3001;
+    const host = process.env.NODE_ENV === 'production' ? '0.0.0.0' : 'localhost';
+    app.listen(port, host, () => {
         console.log('server is running on 3001');
     });
 })
