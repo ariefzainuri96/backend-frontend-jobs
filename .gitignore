@@ -26,4 +26,4 @@ yarn-error.log*
 
 /crt
 
-/dist/crt/*
+/dist/crt/
