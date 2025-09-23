@@ -16,6 +16,12 @@ declare module 'express-serve-static-core' {
     }
 }
 
+const corsOptions = {
+    origin: 'https://ariefzainuri96.github.io', // Your React app URL
+    methods: 'GET,POST,OPTIONS,DELETE,PUT', // Allow these methods
+    allowedHeaders: 'Content-Type,Authorization', // Allow these headers
+};
+
 const path = require('path');
 const cors = require('cors');
 const app = express();
@@ -23,7 +29,7 @@ const swaggerUi = require('swagger-ui-express');
 const swaggerDoc = require('../swagger/swagger-output.json');
 
 // enabling CORS for any unknown origin(https://xyz.example.com)
-app.use(cors());
+app.use(cors(corsOptions));
 app.use(express.json());
 // app.use(loggerMiddleware)
 

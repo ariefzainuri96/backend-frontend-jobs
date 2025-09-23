@@ -12,13 +12,18 @@ const user_route_1 = __importDefault(require("../routes/user_route"));
 const fs_1 = __importDefault(require("fs"));
 const https_1 = __importDefault(require("https"));
 require("dotenv/config");
+const corsOptions = {
+    origin: 'https://ariefzainuri96.github.io',
+    methods: 'GET,POST,OPTIONS,DELETE,PUT',
+    allowedHeaders: 'Content-Type,Authorization', // Allow these headers
+};
 const path = require('path');
 const cors = require('cors');
 const app = (0, express_1.default)();
 const swaggerUi = require('swagger-ui-express');
 const swaggerDoc = require('../swagger/swagger-output.json');
 // enabling CORS for any unknown origin(https://xyz.example.com)
-app.use(cors());
+app.use(cors(corsOptions));
 app.use(express_1.default.json());
 // app.use(loggerMiddleware)
 // Swagger route
