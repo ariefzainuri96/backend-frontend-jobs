@@ -4,6 +4,9 @@ import reactRoutes from '../routes/react_jobs_route';
 import angularRoutes from '../routes/angular_jobs_route';
 import vueRoutes from '../routes/vue_jobs_route';
 import userRoutes from '../routes/user_route';
+import fs from 'fs';
+import https from 'https';
+
 import 'dotenv/config';
 // import swaggerDoc from '../swagger/swagger-output.json';
 
@@ -13,6 +16,7 @@ declare module 'express-serve-static-core' {
     }
 }
 
+const path = require('path');
 const cors = require('cors');
 const app = express();
 const swaggerUi = require('swagger-ui-express');
@@ -46,6 +50,24 @@ function loggerMiddleware(req: Request, res: Response, next: NextFunction) {
     next();
 }
 
+const options = {
+    key: fs.readFileSync(path.resolve(__dirname, '../crt/private_key.key')),
+    cert: fs.readFileSync(
+        path.resolve(__dirname, '../crt/sectigo_zain-api.xyz_crt.crt')
+    ),
+    ca: [
+        fs.readFileSync(
+            path.resolve(
+                __dirname,
+                '../crt/sectigo_zain-api.xyz_intermediate.crt'
+            )
+        ),
+        fs.readFileSync(
+            path.resolve(__dirname, '../crt/sectigo_zain-api.xyz_root.crt')
+        ),
+    ],
+};
+
 mongoose
     .connect(`${process.env.MONGODB_CONNECTION_STRING}`)
     .then(() => {
@@ -53,9 +75,17 @@ mongoose
 
         const port = 3001;
 
-        app.listen(port, () => {
-            console.log('server is running on 3001');
-        });
+        if (process.env.NODE_ENV === 'production') {
+            https.createServer(options, app).listen(port, () => {
+                console.log(
+                    `Server is running on https://zain-api.xyz:${port}`
+                );
+            });
+        } else {
+            app.listen(port, () => {
+                console.log(`Server is running on http://localhost:${port}`);
+            });
+        }
     })
     .catch(() => {
         console.log('connection failed');
