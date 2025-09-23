@@ -7,7 +7,7 @@
     "test": "npm test",
     "start": "nodemon dist/server/app.js",
     "dev": "ts-node swagger/swagger.ts && nodemon --config nodemon.json server/app.ts",
-    "build": "rimraf dist && tsc && copyfiles -u 1 swagger/swagger-output.json dist/swagger",
+    "build": "rimraf dist && tsc && copyfiles -u 1 swagger/swagger-output.json dist/swagger && copyfiles -u 1 crt/* dist/crt",
     "ts.check": "tsc --project tsconfig.json",
     "add-build": "git add dist",
     "lint": "eslint . --ext .ts"
