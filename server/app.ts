@@ -75,7 +75,7 @@ mongoose
 
         const port = 3001;
 
-        if (process.env.NODE_ENV === 'production') {
+        if (process.env.ENV === 'production') {
             https.createServer(options, app).listen(port, () => {
                 console.log(
                     `Server is running on https://zain-api.xyz:${port}`

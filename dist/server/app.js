@@ -50,7 +50,7 @@ mongoose_1.default
     .then(() => {
     console.log('connected to mongodb');
     const port = 3001;
-    if (process.env.NODE_ENV === 'production') {
+    if (process.env.ENV === 'production') {
         https_1.default.createServer(options, app).listen(port, () => {
             console.log(`Server is running on https://zain-api.xyz:${port}`);
         });
