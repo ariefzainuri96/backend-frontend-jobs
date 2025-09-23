@@ -11,8 +11,8 @@ const doc = {
         title: 'My Express API',
         description: 'API documentation generated with swagger-autogen',
     },
-    host: `${process.env.NODE_ENV === 'production' ? '205.198.87.68' : 'localhost'}:3001`,
-    schemes: ['http'],
+    host: `${process.env.ENV === 'production' ? 'zain-api.xyz' : 'localhost'}:3001`,
+    schemes: process.env.ENV === 'production' ? ['https'] : ['http'],
     components: {
         // OpenAPI 3.0
         // securitySchemes: {
