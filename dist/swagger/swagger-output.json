@@ -31,7 +31,18 @@
     },
     "/react/jobs/": {
       "post": {
-        "description": "",
+        "summary": "Post Job",
+        "description": "Post job related to react framework",
+        "parameters": [
+          {
+            "name": "body",
+            "required": true,
+            "in": "body",
+            "schema": {
+              "$ref": "#/components/schemas/ReactJobRequest"
+            }
+          }
+        ],
         "responses": {
           "default": {
             "description": ""
@@ -312,6 +323,51 @@
           },
           "password": {
             "type": "string"
+          }
+        }
+      },
+      "ReactJobRequest": {
+        "title": "Job",
+        "required": [
+          "title",
+          "type",
+          "description",
+          "location",
+          "salary",
+          "company"
+        ],
+        "properties": {
+          "title": {
+            "type": "string"
+          },
+          "type": {
+            "type": "string"
+          },
+          "description": {
+            "type": "string"
+          },
+          "location": {
+            "type": "string"
+          },
+          "salary": {
+            "type": "string"
+          },
+          "company": {
+            "type": "object",
+            "properties": {
+              "name": {
+                "type": "string"
+              },
+              "description": {
+                "type": "string"
+              },
+              "contactEmail": {
+                "type": "string"
+              },
+              "contactPhone": {
+                "type": "string"
+              }
+            }
           }
         }
       }

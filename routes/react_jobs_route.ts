@@ -15,7 +15,18 @@ const router = express.Router();
 router.use(validateToken);
 
 // add job
-router.post('/', async (req, res) => await addJob<JobItem>(ReactJob, req, res));
+router.post('/', async (req, res) => {
+    /*
+    #swagger.summary = 'Post Job';
+    #swagger.description = 'Post job related to react framework';
+    #swagger.parameters['body'] = {
+        required: true,     
+        in: 'body',   
+        schema: { $ref: '#/components/schemas/ReactJobRequest' },
+    };
+    */
+    return await addJob<JobItem>(ReactJob, req, res);
+});
 
 // get all jobs
 router.get('/', async (req, res) => await getJobs<JobItem>(ReactJob, req, res));

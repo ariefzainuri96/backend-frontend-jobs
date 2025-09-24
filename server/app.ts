@@ -8,7 +8,6 @@ import fs from 'fs';
 import https from 'https';
 
 import 'dotenv/config';
-// import swaggerDoc from '../swagger/swagger-output.json';
 
 declare module 'express-serve-static-core' {
     interface Request {
@@ -28,7 +27,6 @@ const app = express();
 const swaggerUi = require('swagger-ui-express');
 const swaggerDoc = require('../swagger/swagger-output.json');
 
-// enabling CORS for any unknown origin(https://xyz.example.com)
 app.use(cors(corsOptions));
 app.use(express.json());
 // app.use(loggerMiddleware)

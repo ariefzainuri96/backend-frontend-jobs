@@ -4,7 +4,7 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
 };
 Object.defineProperty(exports, "__esModule", { value: true });
 const swagger_autogen_1 = __importDefault(require("swagger-autogen"));
-const swagger_schema_1 = __importDefault(require("./swagger-schema"));
+const swagger_schema_1 = require("./swagger-schema");
 require("dotenv/config");
 const doc = {
     info: {
@@ -23,7 +23,8 @@ const doc = {
         //     },
         // },
         schemas: {
-            LoginRequest: swagger_schema_1.default,
+            LoginRequest: swagger_schema_1.userSwaggerSchema,
+            ReactJobRequest: swagger_schema_1.reactSwaggerSchema,
         },
     },
     securityDefinitions: {

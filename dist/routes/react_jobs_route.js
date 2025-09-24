@@ -20,7 +20,18 @@ const router = express_1.default.Router();
 // validate token for all request in this routes
 router.use(validate_token_1.validateToken);
 // add job
-router.post('/', (req, res) => __awaiter(void 0, void 0, void 0, function* () { return yield (0, jobs_controller_1.addJob)(job_model_1.ReactJob, req, res); }));
+router.post('/', (req, res) => __awaiter(void 0, void 0, void 0, function* () {
+    /*
+    #swagger.summary = 'Post Job';
+    #swagger.description = 'Post job related to react framework';
+    #swagger.parameters['body'] = {
+        required: true,
+        in: 'body',
+        schema: { $ref: '#/components/schemas/ReactJobRequest' },
+    };
+    */
+    return yield (0, jobs_controller_1.addJob)(job_model_1.ReactJob, req, res);
+}));
 // get all jobs
 router.get('/', (req, res) => __awaiter(void 0, void 0, void 0, function* () { return yield (0, jobs_controller_1.getJobs)(job_model_1.ReactJob, req, res); }));
 // get job by id

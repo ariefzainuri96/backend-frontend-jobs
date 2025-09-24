@@ -22,7 +22,6 @@ const cors = require('cors');
 const app = (0, express_1.default)();
 const swaggerUi = require('swagger-ui-express');
 const swaggerDoc = require('../swagger/swagger-output.json');
-// enabling CORS for any unknown origin(https://xyz.example.com)
 app.use(cors(corsOptions));
 app.use(express_1.default.json());
 // app.use(loggerMiddleware)

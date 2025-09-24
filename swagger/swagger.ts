@@ -1,5 +1,5 @@
 import swaggerAutogen from 'swagger-autogen';
-import userSwaggerSchema from './swagger-schema';
+import { reactSwaggerSchema, userSwaggerSchema } from './swagger-schema';
 import 'dotenv/config';
 
 const doc = {
@@ -22,6 +22,7 @@ const doc = {
         // },
         schemas: {
             LoginRequest: userSwaggerSchema,
+            ReactJobRequest: reactSwaggerSchema,
         },
     },
     securityDefinitions: {
