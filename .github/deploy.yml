@@ -1,0 +1,35 @@
+name: Deploy to VPS
+
+on:
+    push:
+        branches:
+            - main # Trigger this action only when changes are pushed to the 'main' branch (or any other branch you prefer)
+
+jobs:
+    deploy:
+        runs-on: ubuntu-latest
+
+        steps:
+            # Step 1: Check out the latest code from the repository
+            - name: Checkout code
+              uses: actions/checkout@v2
+
+            # Step 2: Set up SSH for accessing the VPS
+            - name: Set up SSH
+              uses: webfactory/ssh-agent@v0.5.3
+              with:
+                  ssh-private-key: ${{ secrets.SSH_PRIVATE_KEY }}
+
+            # Step 3: Deploy to VPS
+            - name: Deploy to VPS
+              run: |
+                  ssh -o StrictHostKeyChecking=no user@205.198.87.68 << 'EOF'
+                    cd /root/backend/nodejs/backend-frontend-jobs
+                    git pull origin main
+                    npm install
+                    npm run build
+                    pm2 stop 0
+                    pm2 start 0
+                    pm2 startup
+                    pm2 save
+                  EOF
