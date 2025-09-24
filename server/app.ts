@@ -42,7 +42,7 @@ app.use('/users', userRoutes);
 
 // greetings
 app.get('/', (_, res: Response) => {
-    res.send('You are connected to Frontend Jobs API!!');
+    res.send('You are connected to Frontend Jobs API!!!');
 });
 
 function loggerMiddleware(req: Request, res: Response, next: NextFunction) {
