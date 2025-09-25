@@ -29,6 +29,7 @@ declare module 'express-serve-static-core' {
 const allowedOrigins = [
     'https://ariefzainuri96.github.io', // Production URL (React app)
     'http://localhost:3000', // Local development URL (React app)
+    'https://zain-api.xyz', // swagger
 ];
 
 const corsOptions = {
