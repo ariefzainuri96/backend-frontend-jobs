@@ -15,16 +15,37 @@ declare module 'express-serve-static-core' {
     }
 }
 
-const corsOptions = {
-    origin: 'https://ariefzainuri96.github.io', // Your React app URL
-    methods: 'GET,POST,OPTIONS,DELETE,PUT', // Allow these methods
-    allowedHeaders: 'Content-Type,Authorization', // Allow these headers
-};
+// const corsOptions = {
+//     origin: 'https://ariefzainuri96.github.io', // Your React app URL
+//     methods: 'GET,POST,OPTIONS,DELETE,PUT', // Allow these methods
+//     allowedHeaders: 'Content-Type,Authorization', // Allow these headers
+// };
 
-const corsOptions2 = {
-    origin: 'http://localhost:3000', // Your React app URL
-    methods: 'GET,POST,OPTIONS,DELETE,PUT', // Allow these methods
-    allowedHeaders: 'Content-Type,Authorization', // Allow these headers
+// const corsOptions2 = {
+//     origin: 'http://localhost:3000', // Your React app URL
+//     methods: 'GET,POST,OPTIONS,DELETE,PUT', // Allow these methods
+//     allowedHeaders: 'Content-Type,Authorization', // Allow these headers
+// };
+
+const allowedOrigins = [
+    'https://ariefzainuri96.github.io', // Production URL (React app)
+    'http://localhost:3000', // Local development URL (React app)
+];
+
+const corsOptions = {
+    origin: (
+        origin: string,
+        callback: (arg0: Error | null, arg1: boolean | undefined) => void
+    ) => {
+        // If the origin is not present in the allowed origins, allow the request
+        if (allowedOrigins.indexOf(origin) !== -1 || !origin) {
+            callback(null, true);
+        } else {
+            callback(new Error('Not allowed by CORS'), false);
+        }
+    },
+    methods: 'GET,POST,OPTIONS,DELETE,PUT', // Allow specific methods
+    allowedHeaders: 'Content-Type,Authorization', // Allow specific headers
 };
 
 const path = require('path');
@@ -33,9 +54,9 @@ const app = express();
 const swaggerUi = require('swagger-ui-express');
 const swaggerDoc = require('../swagger/swagger-output.json');
 
-app.use(cors());
+// app.use(cors());
 app.use(cors(corsOptions));
-app.use(cors(corsOptions2));
+// app.use(cors(corsOptions2));
 app.use(express.json());
 // app.use(loggerMiddleware)
 
