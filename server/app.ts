@@ -27,6 +27,7 @@ const app = express();
 const swaggerUi = require('swagger-ui-express');
 const swaggerDoc = require('../swagger/swagger-output.json');
 
+app.use(cors());
 app.use(cors(corsOptions));
 app.use(express.json());
 // app.use(loggerMiddleware)
