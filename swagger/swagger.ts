@@ -8,8 +8,8 @@ const doc = {
         description: 'API documentation generated with swagger-autogen',
     },
     host: `${
-        process.env.ENV === 'production' ? 'zain-api.xyz' : 'localhost'
-    }:3001`, // Update for production later
+        process.env.ENV === 'production' ? 'zain-api.xyz' : 'localhost:3001'
+    }`, // Update for production later
     schemes: process.env.ENV === 'production' ? ['https'] : ['http'],
     components: {
         // OpenAPI 3.0

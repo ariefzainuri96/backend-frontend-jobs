@@ -5,7 +5,6 @@ import angularRoutes from '../routes/angular_jobs_route';
 import vueRoutes from '../routes/vue_jobs_route';
 import userRoutes from '../routes/user_route';
 import fs from 'fs';
-import https from 'https';
 
 import 'dotenv/config';
 
@@ -106,19 +105,9 @@ mongoose
     .then(() => {
         console.log('connected to mongodb');
 
-        const port = 3001;
-
-        if (process.env.ENV === 'production') {
-            https.createServer(options, app).listen(port, () => {
-                console.log(
-                    `Server is running on https://zain-api.xyz:${port}`
-                );
-            });
-        } else {
-            app.listen(port, () => {
-                console.log(`Server is running on http://localhost:${port}`);
-            });
-        }
+        app.listen(3001, () => {
+            console.log('Server is running on http://localhost:3001');
+        });
     })
     .catch(() => {
         console.log('connection failed');
