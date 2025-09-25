@@ -21,6 +21,12 @@ const corsOptions = {
     allowedHeaders: 'Content-Type,Authorization', // Allow these headers
 };
 
+const corsOptions2 = {
+    origin: 'http://localhost:3000', // Your React app URL
+    methods: 'GET,POST,OPTIONS,DELETE,PUT', // Allow these methods
+    allowedHeaders: 'Content-Type,Authorization', // Allow these headers
+};
+
 const path = require('path');
 const cors = require('cors');
 const app = express();
@@ -29,6 +35,7 @@ const swaggerDoc = require('../swagger/swagger-output.json');
 
 app.use(cors());
 app.use(cors(corsOptions));
+app.use(cors(corsOptions2));
 app.use(express.json());
 // app.use(loggerMiddleware)
 
